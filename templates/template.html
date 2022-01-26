@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gestor de Compras</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
+  </head>
+  <body>
+    <div class="container">       
+      <!-- <a class="btn btn-primary" href="/login" role="button">Login </a> -->    <br/>   
+      <div class="d-flex justify-content-center">
+        <a class="btn btn-primary btn-lg" href="/lista" role="button"><i class="bi-list"></i> Minhas Listas</a>
+        <a class="btn btn-primary btn-lg" href="/carrinho" role="button"><i class="bi-cart"></i> Carrinho de Compras </a>       
+        <a class="btn btn-danger btn-lg" href="/logout" role="button"><i class="bi-arrow-left-circle-fill"></i> Logout </a>           
+      </div><br/>
+
+        <!--cria container onde as mensagens serão exibidas-->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <!--condição para exibição das mensagens-->
+                <ul id="messages" class="list-unstyled">
+                    <!--laço e repetição para exibição das mensagens-->
+                {% for message in messages %}
+                    <li class="alert alert-success">{{ message }}</li><br/>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+                <!--fim dos laços-->
+        <div class="page-header">
+            <h1>{{ titulo }}</h1>
+        </div>
+        {% block conteudo %}{% endblock %}
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,65 @@
+{% extends "template.html" %}
+<!--criamos um bloco de conteúdo a ser interpretado pelo python-->
+{% block conteudo %}
+    <table class="table table-striped table-responsive table-bordered" id="lista">
+        <thead style="text-align:center;">
+            <tr>
+                <th>Produto</th>
+                <th>Qtde</th>
+                <th>Preço</th>
+                <th colspan="2">Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in lista  %}        
+            <tr>
+                <td width="90"><input type="text"  style="width:80px;" value="{{ item[3] }}"></td>
+                <td width="20"><input type="number" style="width:50px;" min="1" value="{{ item[4] }}"></td>
+                <td><input class="preco" id="preco" type="text" style="width:70px;" value="{{ item[5] }}"></td>
+                <td><a class="btn btn-success btn-lg" role="button"><i class="bi-cart-check-fill"></i></a>  </td>
+                <td><a class="btn btn-danger btn-lg" onclick='removeLinha(this)' role="button"><i class="bi-cart-x-fill"></i></a>  </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary btn-lg" onclick="adicionaLinha('lista')" role="button"><i class="bi-cart-plus-fill"></i> Novo item</a>
+    <a class="btn btn-success btn-lg" role="button"><i class="bi-cart-plus-fill"></i> Importar Lista</a>
+    <a class="btn btn-info btn-lg" role="button"><i class="bi-cart-plus-fill"></i> Salvar Lista</a>
+
+    <script>
+        $(document).ready(function(){
+            $('.preco').mask('000.000.000.000.000,00', {reverse: true});
+            
+            $(".preco").change(function(){
+                $("#preco").html($(this).val().replace(/\D/g,''))
+            })
+        
+        });
+
+    </script>
+
+    <script>
+        function adicionaLinha(idTabela) {
+
+            var tabela = document.getElementById(idTabela);
+            var numeroLinhas = tabela.rows.length;
+            var linha = tabela.insertRow(numeroLinhas);
+            var celula1 = linha.insertCell(0);
+            var celula2 = linha.insertCell(1);   
+            var celula3 = linha.insertCell(2); 
+            var celula4 = linha.insertCell(3);
+            var celula5 = linha.insertCell(4);
+            celula1.innerHTML = "<td width='90'><input type='text'  style='width:80px;'></td>"
+            celula2.innerHTML = "<td width='20'><input type='number' style='width:50px;' min='1'></td>"
+            celula3.innerHTML = "<td><input class='preco' id='preco' type='text' style='width:70px;' min='1'></td>"
+            celula4.innerHTML = "<td><a class='btn btn-success btn-lg' role='button'><i class='bi-cart-check-fill'></i></a> </td>"
+            celula5.innerHTML = "<td><a class='btn btn-danger btn-lg' onclick='removeLinha(this)' role='button'><i class='bi-cart-x-fill'></i></a></td>"
+        }
+        
+        function removeLinha(linha) {
+            var i=linha.parentNode.parentNode.rowIndex;
+            document.getElementById('lista').deleteRow(i);
+        }             
+    </script>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "template.html" %}
+<!--criamos um bloco de conteúdo a ser interpretado pelo python-->
+{% block conteudo %}
+    <table class="table table-striped table-responsive table-bordered">
+        <thead>
+            <tr>
+                <th>Descrição</th>
+                <th>Data de Compra</th>
+                <th>#</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for lista in listas  %}    
+                <tr>
+                    <td>{{ lista[7] }}</td>
+                    <td>{{ lista[6] }}</td>
+                    <td><a href="/detalha?lista={{ lista[9] }}"><button type="button" class="btn btn-success">Visualizar</button></a></td>
+                </tr>
+        {% endfor %}
+        <!--encerramos a estrutura de repetição-->
+        </tbody>
+    </table>
+{% endblock %}
