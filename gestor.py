@@ -93,10 +93,6 @@ def carrinho():
 
     return render_template('carrinho.html', titulo='Carrinho de Compras', lista=result)    
 
-@app.route('/calculadora')
-def calculadora():
-    return render_template('calculadora.html', titulo='Calculadora', pokemons=lista)    
-
 @app.route('/novo')
 def novo():
     if 'usuario_logado' not in session or session['usuario_logado'] == None:
