@@ -1,1 +1,1 @@
-web: python gestor.py 5001
+web: gunicorn gestor:app
