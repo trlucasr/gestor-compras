@@ -35,6 +35,9 @@ def index():
 @app.route('/lista')
 def listag():
 
+    if 'usuario_logado' not in session or session['usuario_logado'] == None:
+        return redirect(url_for('login', proxima=url_for('lista')))
+
     query = "SELECT * FROM listas GROUP BY `codlista`"
     values = db.selectdb(query)
 
@@ -42,6 +45,9 @@ def listag():
 
 @app.route('/detalha', methods=['GET',])
 def detlista():
+
+    if 'usuario_logado' not in session or session['usuario_logado'] == None:
+        return redirect(url_for('login', proxima=url_for('lista')))
 
     lista = request.args.get('lista')
     titulo = 'Detalhes da Lista'
@@ -53,6 +59,9 @@ def detlista():
 
 @app.route('/carrinho')
 def carrinho():
+
+    if 'usuario_logado' not in session or session['usuario_logado'] == None:
+        return redirect(url_for('login', proxima=url_for('lista')))
     
     data = date.today()
 
@@ -97,7 +106,6 @@ def criar():
     nome = request. form['nome']
     especie = request. form['especie']
     tipo = request. form['tipo']
-    pokemon = Pokemon(nome, especie, tipo)
     return redirect(url_for('index'))
 
 @app.route('/autenticar', methods=['POST', ])
