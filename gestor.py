@@ -26,11 +26,6 @@ treinadoras = {treinadora1.id: treinadora1,
             treinadora2.id: treinadora2,
             treinadora3.id: treinadora3}
 
-#base de dados de pokemons
-pokemon1 = Pokemon('Meowth', 'Arranha Gato', 'Normal')
-
-lista = [pokemon1]
-
 #configuração da rota index.
 @app.route('/')
 def index():
@@ -103,7 +98,6 @@ def criar():
     especie = request. form['especie']
     tipo = request. form['tipo']
     pokemon = Pokemon(nome, especie, tipo)
-    lista.append(pokemon)
     return redirect(url_for('index'))
 
 @app.route('/autenticar', methods=['POST', ])
