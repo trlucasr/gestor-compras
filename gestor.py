@@ -26,8 +26,6 @@ treinadoras = {treinadora1.id: treinadora1,
             treinadora2.id: treinadora2,
             treinadora3.id: treinadora3}
 
-proxima = url_for('listag')    
-
 #configuração da rota index.
 @app.route('/')
 def index():
@@ -38,6 +36,7 @@ def index():
 def listag():
 
     if 'usuario_logado' not in session or session['usuario_logado'] == None:
+        proxima = url_for('listag') 
         return render_template('login.html', proxima=proxima)
 
     query = "SELECT * FROM listas GROUP BY `codlista`"
@@ -49,6 +48,7 @@ def listag():
 def detlista():
 
     if 'usuario_logado' not in session or session['usuario_logado'] == None:
+        proxima = url_for('listag') 
         return render_template('login.html', proxima=proxima)
 
     lista = request.args.get('lista')
@@ -63,6 +63,7 @@ def detlista():
 def carrinho():
 
     if 'usuario_logado' not in session or session['usuario_logado'] == None:
+        proxima = url_for('listag') 
         return render_template('login.html', proxima=proxima)
     
     data = date.today()
