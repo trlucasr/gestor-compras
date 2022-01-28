@@ -39,7 +39,7 @@ def listag():
         proxima = url_for('listag') 
         return render_template('login.html', proxima=proxima)
 
-    query = "SELECT * FROM listas GROUP BY `codlista`"
+    query = "SELECT * FROM listas WHERE usuario = '"+session['usuario_logado']+"' AND produto not in ('RL') GROUP BY `codlista`"
     values = db.selectdb(query)
 
     return render_template('lista.html', titulo='Minhas Listas', listas=values)   
